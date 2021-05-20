@@ -10,17 +10,21 @@ require '../db_connection.php';
 $data = json_decode(file_get_contents("php://input"));
 
 if (
-    isset($data->id)
-    && isset($data->user_name)
+    isset($data->user_name)
+    && isset($data->user_last_name)
+    && isset($data->user_ci)
     && isset($data->user_email)
-    && is_numeric($data->id)
     && !empty(trim($data->user_name))
+    && !empty(trim($data->user_last_name))
+    && !empty(trim($data->user_ci))
     && !empty(trim($data->user_email))
 ) {
     $username = mysqli_real_escape_string($db_conn, trim($data->user_name));
+    $userlastname = mysqli_real_escape_string($db_conn, trim($data->user_last_name));
+    $userci = mysqli_real_escape_string($db_conn, trim($data->user_ci));
     $useremail = mysqli_real_escape_string($db_conn, trim($data->user_email));
     if (filter_var($useremail, FILTER_VALIDATE_EMAIL)) {
-        $updateUser = mysqli_query($db_conn, "UPDATE `users` SET `user_name`='$username', `user_email`='$useremail' WHERE `id`='$data->id'");
+        $updateUser = mysqli_query($db_conn, "UPDATE `users` SET `user_name`='$username', `user_last_name`='$userlastname', `user_ci`='$userci', `user_email`='$useremail' WHERE `id`='$data->id'");
         if ($updateUser) {
             echo json_encode(["success" => 1, "msg" => "User Updated."]);
         } else {
@@ -30,5 +34,5 @@ if (
         echo json_encode(["success" => 0, "msg" => "Invalid Email Address!"]);
     }
 } else {
-    echo json_encode(["success" => 0, "msg" => "Please fill all the required fields!"]);
+    echo json_encode(["success" => 0, "msg" => "Por favor ingrese los campos requeridos!"]);
 }
