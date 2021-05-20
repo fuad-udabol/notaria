@@ -8,11 +8,48 @@ export const Actions = () => {
   //Procedures Related
   let [procedures, setProcedures] = useState([]);
   let [proceduresLength, setProceduresLength] = useState(null);
-  let [procedureTypes, setProcedureTypes] = useState(null);
+  let [procedureTypes, setProcedureTypes] = useState([]);
+
+  let [proceduresCount, setProceduresCount] = useState([]);
 
   let [currentPage, setCurrentPage] = useState(0);
 
+  //Effects
+  useEffect(() => {
+    switch (currentPage) {
+      case 0:
+        loadProceduresCount();
+        break;
+      case 1:
+        loadUsers();
+        break;
+      case 2:
+        loadProcedures();
+        break;
+      case 3:
+        loadProcedureTypes();
+        loadUsers();
+        break;
+      default:
+        setCurrentPage(0);
+    }
+  }, [currentPage]);
+
   //Procedures
+  const loadProceduresCount = () => {
+    fetch("http://localhost/notaria/backend/procedures/all-procedures-count-home.php")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        setProceduresCount(data.procedures.reverse());
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
   const loadProcedures = () => {
     fetch("http://localhost/notaria/backend/procedures/all-procedures.php")
       .then((res) => {
@@ -79,29 +116,11 @@ export const Actions = () => {
         console.log(err);
       });
   }
-  useEffect(() => {
-    loadProcedureTypes();
-    switch (currentPage) {
-      case 0:
-        console.log("Loading Home page");
-        break;
-      case 1: 
-        loadUsers();
-      break;
-      case 2: 
-        loadProcedures();
-      break;
-      case 3: 
-        loadUsers();
-      break;
-      default: 
-        setCurrentPage(0);
-    }
-  }, [currentPage]);
+
   const getDate = (isoDate) => {
-    const procedureDate = new Date(isoDate*1000).toLocaleString();
+    const procedureDate = new Date(isoDate * 1000).toLocaleString();
     return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
-  };  
+  };
   const insertProcedure = (newProcedure) => {
     fetch("http://localhost/notaria/backend/procedures/add-procedure.php", {
       method: "POST",
@@ -218,34 +237,34 @@ export const Actions = () => {
         console.log(err);
       });
   };
- const deleteProcedure = (theID) => {
-  let procedureDeleted = procedures.filter((procedure) => {
-    return procedure.id !== theID;
-  });
-  fetch("http://localhost/notaria/backend/procedures/delete-procedure.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id: theID }),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        setProcedures(procedureDeleted);
-        if (procedures.length === 1) {
-          setProceduresLength(0);
-        }
-      } else {
-        alert(data.msg);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
+  const deleteProcedure = (theID) => {
+    let procedureDeleted = procedures.filter((procedure) => {
+      return procedure.id !== theID;
     });
-};
+    fetch("http://localhost/notaria/backend/procedures/delete-procedure.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: theID }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          setProcedures(procedureDeleted);
+          if (procedures.length === 1) {
+            setProceduresLength(0);
+          }
+        } else {
+          alert(data.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const deleteUser = (theID) => {
     let userDeleted = users.filter((user) => {
       return user.id !== theID;
@@ -291,6 +310,7 @@ export const Actions = () => {
     currentPage,
     setCurrentPage,
     procedureTypes,
-    insertProcedure
+    insertProcedure,
+    proceduresCount
   };
 };
