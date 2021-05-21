@@ -5,7 +5,6 @@ const Procedures = () => {
     const {
         procedures,
         proceduresLength,
-        editProcedureMode,
         cancelProcedureEdit,
         updateUser,
         deleteProcedure,
@@ -22,11 +21,6 @@ const Procedures = () => {
             ...newData,
             [field]: e.target.value,
         });
-    };
-
-    const enableEdit = (id, user_name, user_last_name, user_ci, user_email) => {
-        setNewData({ id, user_name, user_last_name, user_ci, user_email });
-        editProcedureMode(id);
     };
 
     const deleteConfirm = (id) => {
