@@ -37,7 +37,7 @@ export const Actions = () => {
 
   //Procedures
   const loadProceduresCount = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedures-count-home.php")
+    fetch("http://localhost/notaria/backend/procedures/all-procedures-count-home.php")
     .then((res) => {
       return res.json();
     })
@@ -51,7 +51,7 @@ export const Actions = () => {
     });
   };
   const loadProcedures = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedures.php")
+    fetch("http://localhost/notaria/backend/procedures/all-procedures.php")
       .then((res) => {
         return res.json();
       })
@@ -66,7 +66,7 @@ export const Actions = () => {
       });
   };
   const loadProcedureTypes = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedure-types.php")
+    fetch("http://localhost/notaria/backend/procedures/all-procedure-types.php")
       .then((res) => {
         return res.json();
       })
@@ -102,7 +102,7 @@ export const Actions = () => {
     setProcedures(procedures);
   };
   const loadUsers = () => {
-    fetch("http://192.168.0.106/notaria/backend/users/all-users.php")
+    fetch("http://localhost/notaria/backend/users/all-users.php")
       .then((res) => {
         return res.json();
       })
@@ -122,7 +122,7 @@ export const Actions = () => {
     return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
   };
   const insertProcedure = (newProcedure) => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/add-procedure.php", {
+    fetch("http://localhost/notaria/backend/procedures/add-procedure.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export const Actions = () => {
       });
   };
   const insertUser = (newUser) => {
-    fetch("http://192.168.0.106/notaria/backend/users/add-user.php", {
+    fetch("http://localhost/notaria/backend/users/add-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,7 +205,7 @@ export const Actions = () => {
 
   const updateUser = (userData) => {
     console.log(userData);
-    fetch("http://192.168.0.106/notaria/backend/users/update-user.php", {
+    fetch("http://localhost/notaria/backend/users/update-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -241,7 +241,7 @@ export const Actions = () => {
     let procedureDeleted = procedures.filter((procedure) => {
       return procedure.id !== theID;
     });
-    fetch("http://192.168.0.106/notaria/backend/procedures/delete-procedure.php", {
+    fetch("http://localhost/notaria/backend/procedures/delete-procedure.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -269,7 +269,7 @@ export const Actions = () => {
     let userDeleted = users.filter((user) => {
       return user.id !== theID;
     });
-    fetch("http://192.168.0.106/notaria/backend/users/delete-user.php", {
+    fetch("http://localhost/notaria/backend/users/delete-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

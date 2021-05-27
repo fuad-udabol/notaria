@@ -7,6 +7,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require '../db_connection.php';
 
+$useremail = mysqli_real_escape_string($db_conn, trim($data->user_email));
+$password = mysqli_real_escape_string($db_conn, trim($data->password));
+
 $allUsers = mysqli_query($db_conn, "SELECT * FROM `users`");
 if (mysqli_num_rows($allUsers) > 0) {
     $all_users = mysqli_fetch_all($allUsers, MYSQLI_ASSOC);
@@ -14,3 +17,5 @@ if (mysqli_num_rows($allUsers) > 0) {
 } else {
     echo json_encode(["success" => 0]);
 }
+
+//$loginUser = mysqli_query($db_conn, "SELECT * FROM `users` WHERE user_email='$useremail' AND 'password'='$password'");
