@@ -23,13 +23,13 @@ const ProcedureForm = () => {
     insertProcedure(newProcedure);
   };
   return (
-    <div className="col-xl-4 col-lg-5">
+    <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h2>Nuevo Tramite</h2>
           <form onSubmit={submitProcedure}>
-            <div class="mb-3">
-              <label class="form-label">Tramite</label>
+            <div className="mb-3">
+              <label className="form-label">Tramite</label>
               <select id="procedure"
                 onChange={(e) => addNewProcedure(e, "procedure_type_id")}
                 className="form-control form-select form-select-sm"
@@ -39,6 +39,7 @@ const ProcedureForm = () => {
                   procedureTypes.map(({ id, name }) => {
                     return (
                       <option
+                        key = {id}
                         id={id}
                         value={id}
                       >{name}</option>
@@ -46,10 +47,10 @@ const ProcedureForm = () => {
                   })
                 }
               </select>
-              <div id="emailHelp" class="form-text">Seleccione el tramite que desea realizar</div>
+              <div id="emailHelp" className="form-text">Seleccione el tramite que desea realizar</div>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Numero de Tramite</label>
+            <div className="mb-3">
+              <label className="form-label">Numero de Tramite</label>
               <input
                 type="number"
                 id="procedureNumber"
@@ -60,8 +61,8 @@ const ProcedureForm = () => {
                 className="form-control"
               />
             </div>
-            <div class="mb-3">
-              <label class="form-label">Cliente</label>
+            <div className="mb-3">
+              <label className="form-label">Cliente</label>
               <select id="procedure"
                 onChange={(e) => addNewProcedure(e, "user_id")}
                 className="form-control form-select form-select-sm"
@@ -74,6 +75,7 @@ const ProcedureForm = () => {
                   users.map(({ id, user_name, user_last_name }) => {
                     return (
                       <option
+                        key={id}
                         id={id}
                         value={id}
                       >{user_name + " "+ user_last_name}</option>
@@ -81,7 +83,7 @@ const ProcedureForm = () => {
                   })
                 }
               </select>
-              <div id="emailHelp" class="form-text">Seleccione un cliente</div>
+              <div id="emailHelp" className="form-text">Seleccione un cliente</div>
             </div>
 
             <div className="my-2"></div>

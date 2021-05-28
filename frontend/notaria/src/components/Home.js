@@ -5,7 +5,9 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 
 const Home = () => {
     const {
-        proceduresCount
+        proceduresCount,
+        usersWithPrivilegies,
+        setFilteredUser
     } = useContext(AppContext);
     const data = {
         labels: proceduresCount.map(({ name }) => {
@@ -53,7 +55,7 @@ const Home = () => {
     const procedureCards = () => {
         return (proceduresCount.map(({ name, id, count }) => {
             return (
-                <div className="col-xl-3 col-md-6 mb-4">
+                <div key={id} className="col-xl-3 col-md-6 mb-4">
                     <div className="card border-bottom-info shadow h-100 py-2">
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
@@ -76,8 +78,25 @@ const Home = () => {
         <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Inicio</h1>
-                <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    className="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                    <select id="procedure"
+                        onChange={(e) => setFilteredUser(e.target.value)}
+                    >
+                    <option
+                        id="-1"
+                        value="-1"
+                    >Filtrar resultados por usuario</option>
+                    {
+                    usersWithPrivilegies.map(({ id, user_name, user_last_name }) => {
+                        return (
+                        <option
+                            key={id}
+                            id={id}
+                            value={id}
+                        >{user_name + " "+ user_last_name}</option>
+                        )
+                    })
+                    }
+                </select>
             </div>
             <div className="row">
                 {procedureCards()}
@@ -96,7 +115,7 @@ const Home = () => {
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                     aria-labelledby="dropdownMenuLink">
-                                    <div className="dropdown-header">Dropdown Header:</div>
+                                    <div className="dropdown-header">Filtrar por usuario:</div>
                                     <a className="dropdown-item" href="#">Action</a>
                                     <a className="dropdown-item" href="#">Another action</a>
                                     <div className="dropdown-divider"></div>

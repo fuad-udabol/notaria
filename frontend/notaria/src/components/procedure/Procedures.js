@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../Context";
-import moment from "moment";
 const Procedures = () => {
     const {
         procedures,
@@ -37,7 +36,7 @@ const Procedures = () => {
         <p>{proceduresLength === null ? "Cargando..." : "Añadir Procedimiento"}</p>
     ) : (
         <div className="row">
-            <div className="col-xl-8 col-lg-7">
+            <div className="col-xl-12 col-lg-12">
                 <div className="container-fluid">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">

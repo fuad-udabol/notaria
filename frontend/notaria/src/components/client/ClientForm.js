@@ -2,7 +2,14 @@ import { useState, useContext } from "react";
 import { AppContext } from "../../Context";
 const ClientForm = () => {
   const { insertUser } = useContext(AppContext);
-  const [newUser, setNewUser] = useState({});
+  const [newUser, setNewUser] = useState({
+    'user_name': "",
+    'user_email': "",
+    'password': "",
+    'user_ci': "",
+    'user_last_name': "",
+    'id_roles': 4
+  });
 
   // Storing the Insert User Form Data.
   const addNewUser = (e, field) => {

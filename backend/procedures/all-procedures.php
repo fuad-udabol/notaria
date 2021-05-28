@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require '../db_connection.php';
 
 // $allProcedures = mysqli_query($db_conn, "SELECT * FROM `procedures`");
-$allProcedures = mysqli_query($db_conn, "SELECT p.id, t.name, u.user_name, u.user_last_name, p.procedure_number, p.procedure_date, t.price FROM procedures p, users u, procedure_types t WHERE p.user_id = u.id AND t.id = p.procedure_type_id");
+$allProcedures = mysqli_query($db_conn, "SELECT p.id, t.name, u.user_name, u.user_last_name, p.procedure_number, p.procedure_date, t.price FROM procedures p, users u, procedure_types t WHERE p.user_id = u.id AND t.id = p.procedure_type_id ORDER BY p.procedure_date ASC");
 if (mysqli_num_rows($allProcedures) > 0) {
     $allProcedures = mysqli_fetch_all($allProcedures, MYSQLI_ASSOC);
     echo json_encode(["success" => 1, "procedures" => $allProcedures]);

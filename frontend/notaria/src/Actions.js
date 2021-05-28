@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import moment from "moment";
 export const Actions = () => {
   //Users related
   let [users, setUsers] = useState([]);
+  let [usersWithPrivilegies, setUsersWithPrivilegies] = useState([]);
   let [userLength, setUserLength] = useState(null);
 
   //Procedures Related
@@ -15,13 +15,15 @@ export const Actions = () => {
   let [currentPage, setCurrentPage] = useState(0);
 
   let [session, setSession] = useState(null);
+  let [filteredUser, setFilteredUser] = useState(null);
 
   //Effects
   useEffect(() => {
     setSession(sessionStorage.getItem("userId"));
     switch (currentPage) {
       case 0:
-        loadProceduresCount();
+        loadProceduresCount(filteredUser);
+        loadUsersWithPrivilegies();
         break;
       case 1:
         loadUsers();
@@ -36,25 +38,39 @@ export const Actions = () => {
       default:
         setCurrentPage(0);
     }
-  }, [currentPage]);
+  }, [currentPage, filteredUser]);
   const removeSession = () => {
     sessionStorage.removeItem("userId");
     setSession(null);
   };
   //Procedures
-  const loadProceduresCount = () => {
-    fetch("http://localhost/notaria/backend/procedures/all-procedures-count-home.php")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        setProceduresCount(data.procedures.reverse());
+  const loadProceduresCount = (userId) => {
+    fetch("http://localhost/notaria/backend/procedures/all-procedures-count-home.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId
+        })
       }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    ).then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success === 1) {
+          setProceduresCount(data.procedures.reverse());
+        } else if(data.success === 0){
+          setFilteredUser(null);
+        } else if(data.success === 3){
+          setFilteredUser(null);
+          alert("Se mostrara el total de tramites");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const loadProcedures = () => {
     fetch("http://localhost/notaria/backend/procedures/all-procedures.php")
@@ -107,6 +123,20 @@ export const Actions = () => {
     });
     setProcedures(procedures);
   };
+  const loadUsersWithPrivilegies = () => {
+    fetch("http://localhost/notaria/backend/users/all-users-with-privilegies.php")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          setUsersWithPrivilegies(data.users.reverse());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   const loadUsers = () => {
     fetch("http://localhost/notaria/backend/users/all-users.php")
       .then((res) => {
@@ -164,15 +194,15 @@ export const Actions = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(userLogin)
-    }).then((res)=>{
+    }).then((res) => {
       return res.json();
-    }).then((data)=>{
+    }).then((data) => {
       if (data.user.length === 1) {
         sessionStorage.setItem("userId", data.user[0].id);
-        sessionStorage.setItem("userName", data.user[0].user_name +" "+ data.user[0].user_last_name);
+        sessionStorage.setItem("userName", data.user[0].user_name + " " + data.user[0].user_last_name);
         setSession(data.user[0].id);
       }
-    }).catch((res)=>{
+    }).catch((res) => {
       console.log(res);
     });
   };
@@ -340,6 +370,8 @@ export const Actions = () => {
     proceduresCount,
     session,
     removeSession,
-    loginAttempt
+    loginAttempt,
+    setFilteredUser,
+    usersWithPrivilegies
   };
 };
