@@ -125,7 +125,8 @@ export const Actions = () => {
 
   const getDate = (isoDate) => {
     const procedureDate = new Date(isoDate * 1000).toLocaleString();
-    return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
+    //return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
+    return procedureDate;
   };
   const insertProcedure = (newProcedure) => {
     fetch("http://localhost/notaria/backend/procedures/add-procedure.php", {
@@ -157,7 +158,7 @@ export const Actions = () => {
       });
   };
   const loginAttempt = (userLogin) => {
-    fetch("http://192.168.0.108/notaria/backend/users/login-user.php", {
+    fetch("http://localhost/notaria/backend/users/login-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
