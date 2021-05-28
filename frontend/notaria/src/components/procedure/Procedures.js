@@ -30,7 +30,8 @@ const Procedures = () => {
     };
     const getDate = (isoDate) => {
         const procedureDate = new Date(isoDate*1000).toLocaleString();
-        return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
+        //return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
+        return procedureDate;
     };
     return !proceduresLength ? (
         <p>{proceduresLength === null ? "Cargando..." : "Añadir Procedimiento"}</p>
@@ -48,7 +49,7 @@ const Procedures = () => {
                                     <thead>
                                         <tr>
                                             <th>Tramite</th>
-                                            <th>Tramite</th>
+                                            <th>Cliente</th>
                                             <th>Numero de Tramite</th>
                                             <th>Fecha</th>
                                             <th>Acción</th>
