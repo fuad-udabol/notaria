@@ -7,10 +7,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require '../db_connection.php';
 
-$allUsers = mysqli_query($db_conn, "SELECT * FROM `users`");
-if (mysqli_num_rows($allUsers) > 0) {
-    $all_users = mysqli_fetch_all($allUsers, MYSQLI_ASSOC);
-    echo json_encode(["success" => 1, "users" => $all_users]);
+$allRoles = mysqli_query($db_conn, "SELECT * FROM `roles`");
+if (mysqli_num_rows($allRoles) > 0) {
+    $all_Roles = mysqli_fetch_all($allRoles, MYSQLI_ASSOC);
+    echo json_encode(["success" => 1, "roles" => $all_Roles]);
 } else {
     echo json_encode(["success" => 0]);
 }

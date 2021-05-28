@@ -19,13 +19,17 @@ if (
     && !empty(trim($data->user_last_name))
     && !empty(trim($data->user_ci))
     && !empty(trim($data->user_email))
+    && !empty(trim($data->id_role))
+    && !empty(trim($data->password))
 ) {
     $username = mysqli_real_escape_string($db_conn, trim($data->user_name));
     $userlastname = mysqli_real_escape_string($db_conn, trim($data->user_last_name));
     $userci = mysqli_real_escape_string($db_conn, trim($data->user_ci));
     $useremail = mysqli_real_escape_string($db_conn, trim($data->user_email));
+    $idrore = mysqli_real_escape_string($db_conn, trim($data->idrole));
+    $password = mysqli_real_escape_string($db_conn, trim($data->password));
     if (filter_var($useremail, FILTER_VALIDATE_EMAIL)) {
-        $insertUser = mysqli_query($db_conn, "INSERT INTO `users`(`user_name`,`user_last_name`,`user_ci`,`user_email`) VALUES('$username','$userlastname','$userci','$useremail')");
+        $insertUser = mysqli_query($db_conn, "INSERT INTO `users`(`user_name`,`user_last_name`,`user_ci`,`user_email`,`id_role`,`password` ) VALUES('$username','$userlastname','$userci','$useremail','$idrole','$password')");
         if ($insertUser) {
             $last_id = mysqli_insert_id($db_conn);
             echo json_encode(["success" => 1, "msg" => "User Inserted1.", "id" => $last_id]);
