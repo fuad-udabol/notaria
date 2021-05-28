@@ -14,8 +14,11 @@ export const Actions = () => {
 
   let [currentPage, setCurrentPage] = useState(0);
 
+  let [session, setSession] = useState(null);
+
   //Effects
   useEffect(() => {
+    setSession(sessionStorage.getItem("userId"));
     switch (currentPage) {
       case 0:
         loadProceduresCount();
@@ -34,24 +37,27 @@ export const Actions = () => {
         setCurrentPage(0);
     }
   }, [currentPage]);
-
+  const removeSession = () => {
+    sessionStorage.removeItem("userId");
+    setSession(null);
+  };
   //Procedures
   const loadProceduresCount = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedures-count-home.php")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        setProceduresCount(data.procedures.reverse());
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    fetch("http://192.168.0.108/notaria/backend/procedures/all-procedures-count-home.php")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          setProceduresCount(data.procedures.reverse());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const loadProcedures = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedures.php")
+    fetch("http://192.168.0.108/notaria/backend/procedures/all-procedures.php")
       .then((res) => {
         return res.json();
       })
@@ -66,7 +72,7 @@ export const Actions = () => {
       });
   };
   const loadProcedureTypes = () => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/all-procedure-types.php")
+    fetch("http://192.168.0.108/notaria/backend/procedures/all-procedure-types.php")
       .then((res) => {
         return res.json();
       })
@@ -102,7 +108,7 @@ export const Actions = () => {
     setProcedures(procedures);
   };
   const loadUsers = () => {
-    fetch("http://192.168.0.106/notaria/backend/users/all-users.php")
+    fetch("http://192.168.0.108/notaria/backend/users/all-users.php")
       .then((res) => {
         return res.json();
       })
@@ -122,7 +128,7 @@ export const Actions = () => {
     return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
   };
   const insertProcedure = (newProcedure) => {
-    fetch("http://192.168.0.106/notaria/backend/procedures/add-procedure.php", {
+    fetch("http://192.168.0.108/notaria/backend/procedures/add-procedure.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -150,8 +156,27 @@ export const Actions = () => {
         console.log(err);
       });
   };
+  const loginAttempt = (userLogin) => {
+    fetch("http://192.168.0.108/notaria/backend/users/login-user.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userLogin)
+    }).then((res)=>{
+      return res.json();
+    }).then((data)=>{
+      if (data.user.length === 1) {
+        sessionStorage.setItem("userId", data.user[0].id);
+        sessionStorage.setItem("userName", data.user[0].user_name +" "+ data.user[0].user_last_name);
+        setSession(data.user[0].id);
+      }
+    }).catch((res)=>{
+      console.log(res);
+    });
+  };
   const insertUser = (newUser) => {
-    fetch("http://192.168.0.106/notaria/backend/users/add-user.php", {
+    fetch("http://192.168.0.108/notaria/backend/users/add-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -205,7 +230,7 @@ export const Actions = () => {
 
   const updateUser = (userData) => {
     console.log(userData);
-    fetch("http://192.168.0.106/notaria/backend/users/update-user.php", {
+    fetch("http://192.168.0.108/notaria/backend/users/update-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -241,7 +266,7 @@ export const Actions = () => {
     let procedureDeleted = procedures.filter((procedure) => {
       return procedure.id !== theID;
     });
-    fetch("http://192.168.0.106/notaria/backend/procedures/delete-procedure.php", {
+    fetch("http://192.168.0.108/notaria/backend/procedures/delete-procedure.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -269,7 +294,7 @@ export const Actions = () => {
     let userDeleted = users.filter((user) => {
       return user.id !== theID;
     });
-    fetch("http://192.168.0.106/notaria/backend/users/delete-user.php", {
+    fetch("http://192.168.0.108/notaria/backend/users/delete-user.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -311,6 +336,9 @@ export const Actions = () => {
     setCurrentPage,
     procedureTypes,
     insertProcedure,
-    proceduresCount
+    proceduresCount,
+    session,
+    removeSession,
+    loginAttempt
   };
 };

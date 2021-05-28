@@ -28,9 +28,9 @@ if (
         $insertUser = mysqli_query($db_conn, "INSERT INTO `users`(`user_name`,`user_last_name`,`user_ci`,`user_email`) VALUES('$username','$userlastname','$userci','$useremail')");
         if ($insertUser) {
             $last_id = mysqli_insert_id($db_conn);
-            echo json_encode(["success" => 1, "msg" => "User Inserted.", "id" => $last_id]);
+            echo json_encode(["success" => 1, "msg" => "User Inserted1.", "id" => $last_id]);
         } else {
-            echo json_encode(["success" => 0, "msg" => "User Not Inserted!"]);
+            echo json_encode(["success" => 0, "msg" => "User Not Inserted2!"]);
         }
     } else {
         echo json_encode(["success" => 0, "msg" => "Invalid Email Address!"]);

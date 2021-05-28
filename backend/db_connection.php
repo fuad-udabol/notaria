@@ -1,2 +1,2 @@
 <?php
-$db_conn = mysqli_connect("localhost","root","","notaria");
+$db_conn = mysqli_connect("localhost","root","","notaria"); 

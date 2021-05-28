@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AppContext } from "../Context";
 const FooterUtils=()=> {
+    const {
+        removeSession
+    } = useContext(AppContext);
     return (
         <div >
         <a className="scroll-to-top rounded" href="#page-top">
@@ -17,7 +22,7 @@ const FooterUtils=()=> {
                         <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div className="modal-footer">
                             <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a className="btn btn-primary" href="login.html">Logout</a>
+                            <a className="btn btn-primary" href="#" data-dismiss="modal" onClick={() => { removeSession() }}>Logout</a>
                         </div>
                     </div>
                 </div>
