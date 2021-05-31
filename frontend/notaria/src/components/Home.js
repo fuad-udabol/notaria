@@ -30,7 +30,7 @@ const Home = () => {
         }),
         datasets: [
             {
-                label: 'Tramite',
+                label: 'Trámite',
                 data: proceduresCount.map(({ count }) => {
                     return count;
                 }),
@@ -161,9 +161,14 @@ const Home = () => {
                                 <DateRange
                                     editableDateInputs={true}
                                     onChange={item => {
+                                        let startDateTem = item.selection.startDate;
+                                        let endDateTem = item.selection.endDate;
+                                        if (startDateTem === endDateTem) {
+                                            endDateTem.setHours(endDateTem.getHours()+20);
+                                        }
                                         setState([item.selection]);
-                                        setStartDate(item.selection.startDate);
-                                        setEndDate(item.selection.endDate);
+                                        setStartDate(startDateTem);
+                                        setEndDate(endDateTem);
                                     }}
                                     moveRangeOnFirstSelection={false}
                                     ranges={state}
@@ -176,7 +181,7 @@ const Home = () => {
                     <div className="card shadow mb-4">
                         <div
                             className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 className="m-0 font-weight-bold text-primary">Tramites</h6>
+                            <h6 className="m-0 font-weight-bold text-primary">Trámites</h6>
                             <div className="dropdown no-arrow">
                                 <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

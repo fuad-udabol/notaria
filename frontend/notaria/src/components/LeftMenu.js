@@ -33,18 +33,18 @@ const LeftMenu = () => {
                     </li>
 
                     <div className="sidebar-heading">
-                        Tramites
+                        Trámites
                     </div>
 
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={() => { setCurrentPage(2) }}>
                             <i className="fas fa-fw fa-chart-area"></i>
-                            <span>Ver todos los tramites</span></a>
+                            <span>Ver todos los trámites</span></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={() => { setCurrentPage(3) }}>
                             <i className="fas fa-fw fa-chart-area"></i>
-                            <span>Anadir un nuevo tramite</span></a>
+                            <span>Añadir un nuevo trámite</span></a>
                     </li>
 
                 </ul>
