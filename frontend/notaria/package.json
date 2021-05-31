@@ -13,6 +13,7 @@
     "react": "^16.6.3",
     "react-chartjs-2": "^3.0.3",
     "react-charts": "*",
+    "react-date-range": "^1.1.4",
     "react-dom": "^16.6.3",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"

@@ -16,13 +16,17 @@ export const Actions = () => {
 
   let [session, setSession] = useState(null);
   let [filteredUser, setFilteredUser] = useState(null);
+  const start = new Date();
+  start.setDate(start.getDate()-7);
+  let [startDate, setStartDate] = useState(start);
+  let [endDate, setEndDate] = useState(new Date());
 
   //Effects
   useEffect(() => {
     setSession(sessionStorage.getItem("userId"));
     switch (currentPage) {
       case 0:
-        loadProceduresCount(filteredUser);
+        loadProceduresCount(filteredUser, startDate, endDate);
         loadUsersWithPrivilegies();
         break;
       case 1:
@@ -38,13 +42,13 @@ export const Actions = () => {
       default:
         setCurrentPage(0);
     }
-  }, [currentPage, filteredUser]);
+  }, [currentPage, filteredUser, startDate, endDate]);
   const removeSession = () => {
     sessionStorage.removeItem("userId");
     setSession(null);
   };
   //Procedures
-  const loadProceduresCount = (userId) => {
+  const loadProceduresCount = (userId, startDate, endDate) => {
     fetch("http://localhost/notaria/backend/procedures/all-procedures-count-home.php",
       {
         method: "POST",
@@ -52,7 +56,9 @@ export const Actions = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id: userId
+          user_id: userId,
+          startDate: startDate.valueOf()/1000,
+          endDate: endDate.valueOf()/1000
         })
       }
     ).then((res) => {
@@ -65,7 +71,6 @@ export const Actions = () => {
           setFilteredUser(null);
         } else if(data.success === 3){
           setFilteredUser(null);
-          alert("Se mostrara el total de tramites");
         }
       })
       .catch((err) => {
@@ -372,6 +377,10 @@ export const Actions = () => {
     removeSession,
     loginAttempt,
     setFilteredUser,
-    usersWithPrivilegies
+    usersWithPrivilegies,
+    setStartDate,
+    setEndDate,
+    startDate,
+    endDate
   };
 };
