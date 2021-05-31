@@ -29,7 +29,6 @@ const Procedures = () => {
     };
     const getDate = (isoDate) => {
         const procedureDate = new Date(isoDate*1000).toLocaleString();
-        //return moment(procedureDate).format('DD/MM/YYY HH:mm:ss');
         return procedureDate;
     };
     return !proceduresLength ? (

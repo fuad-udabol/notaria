@@ -7,7 +7,12 @@ const ProcedureForm = () => {
     const pDate = new Date();
     return pDate.valueOf()/1000;
   };
-  const [newProcedure, setNewProcedure] = useState();
+  const [newProcedure, setNewProcedure] = useState({
+    autor_id: sessionStorage.getItem("userId"),
+    procedure_type_id: 0,
+    procedure_number: null,
+    user_id: null
+  });
 
   // Storing the Insert User Form Data.
   const addNewProcedure = (e, field) => {
