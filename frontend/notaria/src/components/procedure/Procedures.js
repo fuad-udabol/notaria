@@ -39,16 +39,16 @@ const Procedures = () => {
                 <div className="container-fluid">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
-                            <h6 className="h3 mb-0 text-gray-800">Tramite</h6>
+                            <h6 className="h3 mb-0 text-gray-800">Trámite</h6>
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Tramite</th>
+                                            <th>Trámite</th>
                                             <th>Cliente</th>
-                                            <th>Numero de Tramite</th>
+                                            <th>Número de Trámite</th>
                                             <th>Fecha</th>
                                             <th>Acción</th>
                                         </tr>

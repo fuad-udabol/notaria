@@ -31,10 +31,10 @@ const ProcedureForm = () => {
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h2>Nuevo Tramite</h2>
+          <h2>Nuevo Trámite</h2>
           <form onSubmit={submitProcedure}>
             <div className="mb-3">
-              <label className="form-label">Tramite</label>
+              <label className="form-label">Trámite</label>
               <select id="procedure"
                 onChange={(e) => addNewProcedure(e, "procedure_type_id")}
                 className="form-control form-select form-select-sm"
@@ -52,15 +52,15 @@ const ProcedureForm = () => {
                   })
                 }
               </select>
-              <div id="emailHelp" className="form-text">Seleccione el tramite que desea realizar</div>
+              <div id="emailHelp" className="form-text">Seleccione el trámite que desea realizar</div>
             </div>
             <div className="mb-3">
-              <label className="form-label">Numero de Tramite</label>
+              <label className="form-label">Número de Trámite</label>
               <input
                 type="number"
                 id="procedureNumber"
                 onChange={(e) => addNewProcedure(e, "procedure_number")}
-                placeholder="Numero de Tramite"
+                placeholder="Número de Trámite"
                 autoComplete="off"
                 required
                 className="form-control"
@@ -94,7 +94,7 @@ const ProcedureForm = () => {
             <div className="my-2"></div>
             <a href="#" onClick={(e) => { submitProcedure(e) }}
               className="btn btn-primary btn-icon-split btn-lg" >
-              <span className="text">Añadir Tramite</span>
+              <span className="text">Añadir Trámite</span>
             </a>
           </form>
         </div>
