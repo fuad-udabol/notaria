@@ -1,7 +1,9 @@
-# notaria
-# Trabajo final de la materia de Base De Datos
-JOSE MIGUEL SUBELZA
+# Trabajo final 
+# Gestión de base de datos
 
-FUAD SALOMON
+Fuad Salomón Calvo
 
-DEXTER
+Dexter Iván Llano Pomar
+
+José Miguel Subelza Alvarez
+
