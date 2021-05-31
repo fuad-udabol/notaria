@@ -2357,34 +2357,34 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #ca8e1f;
+  border-color: #9b7f32;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #d1b37b;
+  border-color: #e2c463;
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #886b0a;
+  border-color: #e7bf0d;
   box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #d6a912;
+  border-color: #be8f2a;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #2653d4;
-  border-color: #244ec9;
+  background-color: #b67d29;
+  border-color: #a18b3f;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -9592,7 +9592,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #4e73df !important;
+  color: #502f09 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9901,7 +9901,7 @@ a:focus {
 
 .bg-gradient-primary {
   background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-image: linear-gradient(180deg, #895224 10%, #f1a43f 100%);
   background-size: cover;
 }
 
@@ -10861,7 +10861,7 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("https://www.misabogados.com/hubfs/Imported_Blog_Media/notario.jpg");
   background-position: center;
   background-size: cover;
 }

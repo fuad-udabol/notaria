@@ -20,7 +20,10 @@ if (
     $proceduredate = mysqli_real_escape_string($db_conn, trim($data->procedure_date));
     $procedureuserid = mysqli_real_escape_string($db_conn, trim($data->user_id));
     $proceduretypeid = mysqli_real_escape_string($db_conn, trim($data->procedure_type_id));
-    $insertProcedure = mysqli_query($db_conn, "INSERT INTO `procedures`(`procedure_number`,`procedure_date`,`user_id`,`procedure_type_id`) VALUES('$procedurenumber','$proceduredate','$procedureuserid','$proceduretypeid')");
+    $procedureauthorid = mysqli_real_escape_string($db_conn, trim($data->autor_id));
+    $query = "INSERT INTO `procedures` (`procedure_number`, `procedure_date`, `user_id`, `procedure_type_id`, `autor_id`) VALUES ('$procedurenumber', '$proceduredate', '$procedureuserid', '$proceduretypeid', '$procedureauthorid')";
+    $insertProcedure = mysqli_query($db_conn, $query);
+    // var_dump($query);
     if ($insertProcedure) {
         $last_id = mysqli_insert_id($db_conn);
         echo json_encode(["success" => 1, "msg" => "Procedure Inserted.", "id" => $last_id, "date"=>$proceduredate]);
